@@ -8,6 +8,8 @@ on:
     - cron: "10,25,40,55 * * * *"
 
 env:
+  ORIOKS_LOGPASS_LOGIN: ${{ secrets.ORIOKS_LOGPASS_LOGIN }}
+  ORIOKS_LOGPASS_PASSWORD: ${{ secrets.ORIOKS_LOGPASS_PASSWORD }}
   YANDEX_DISK_API_TOKEN: ${{ secrets.YANDEX_DISK_API_TOKEN }}
   VK_API_TOKEN: ${{ secrets.VK_API_TOKEN }}
   VK_PEER_ID: ${{ secrets.ORIOKS_API_TOKEN }}
