@@ -90,9 +90,14 @@ def get_forang(browser) -> dict:
     return (student_id, json_to_save)
 
 
-async def get_student_info():
-    browser = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.FIREFOX)
-    browser.implicitly_wait(10)
+async def get_student_info(attempt=1):
+    try:
+        browser = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.FIREFOX)
+        browser.implicitly_wait(10)
+    except:
+        time.sleep(2)
+        print(f'rerun get_student_info(attempt={attempt})')
+        return await get_student_info(attempt=attempt + 1)
 
     await YandexDisk.download(filename='cookies.pkl')
     try:
