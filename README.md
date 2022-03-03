@@ -3,12 +3,12 @@
 
 Скрипт запускается каждые 15 минут[^1] и сравнивает данные, хранящиеся на [Яндекс Диске](https://disk.yandex.ru/), с информацией от драйвера браузера [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/).
 
-> Ознакомиться со скриптом на основе [API ORIOKS](https://orioks.gitlab.io/student-api/) и соответсвующей инструкцией можно [здесь](https://github.com/llirrikk/orioks-monitoring).[^2]
+_P.S. Существует [скрипт](https://github.com/llirrikk/orioks-monitoring), работающий на основе [ORIOKS STUDENT **API**](https://orioks.gitlab.io/student-api/), но его использование не рекомендуется[^2]._
 
 
 [^1]: > Выполнение может быть отложено в периоды высокой загрузки рабочих процессов GitHub Actions... Самый короткий интервал, с которым вы можете запускать запланированные рабочие процессы, — [каждые 15 минут](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule).
 
-[^2]: > Скрипт на основе API ORIOKS имеет менее точное предоставление информации по сравнению с Selenium WebDriver.
+[^2]: > [ORIOKS STUDENT API](https://orioks.gitlab.io/student-api/) имеет ряд ограничений (не позволяет получить всю необходимую информацию), поэтому рекомендуется использовать скрипт из настоящего репозитория, вместо [скрипта, использующего API](https://github.com/llirrikk/orioks-monitoring).
 
 
 ## Использование
@@ -18,7 +18,8 @@
     git clone https://github.com/llirrikk/orioks-monitoring-selenium.git
     cd orioks-monitoring-selenium
     ```
-    
+
+
 2. Получение [API токена от Yandex Disk](https://yandex.ru/dev/oauth/)
     1. Переходим по [ссылке](https://oauth.yandex.ru/client/new).
         - *Название приложения*:	`ЛЮБОЕ`.
@@ -29,10 +30,7 @@
         https://oauth.yandex.ru/authorize?response_type=token&client_id=ИДЕНТИФИКАТОР_ПРИЛОЖЕНИЯ
     3. Нажимаем кнопку `"Войти как ..."`.
     4. Запоминаем `YANDEX_DISK_API_TOKEN` токен Яндекс Диска.
-    5. Создаем папку для приложения, выполнив в Терминале:
-        ```bash
-        env YANDEX_DISK_TOKEN="YANDEX_DISK_access_token" setup/create_folder_yandex_disk.sh
-        ```
+
 
 3. [^3]Получение [API токена от паблика VK](https://dev.vk.com/)
     1. Создание группы ВК
