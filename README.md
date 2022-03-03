@@ -8,7 +8,7 @@ _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-mon
 
 [^1]: > Выполнение может быть отложено в периоды высокой загрузки рабочих процессов GitHub Actions... Самый короткий интервал, с которым вы можете запускать запланированные рабочие процессы, — [каждые 15 минут](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule).
 
-[^2]: > [ORIOKS STUDENT API](https://orioks.gitlab.io/student-api/) имеет ряд ограничений (не позволяет получить всю необходимую информацию), поэтому рекомендуется использовать скрипт из настоящего репозитория, вместо [скрипта, использующего API](https://github.com/llirrikk/orioks-monitoring).
+[^2]: [ORIOKS STUDENT API](https://orioks.gitlab.io/student-api/) имеет ряд ограничений (не позволяет получить всю необходимую информацию), поэтому рекомендуется использовать скрипт из настоящего репозитория, вместо [скрипта, использующего API](https://github.com/llirrikk/orioks-monitoring).
 
 
 ## Использование
@@ -62,4 +62,4 @@ _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-mon
         - `TG_USE` (*True*, если использовать сервис Telegram, *False* -- в противном случае).
 
 
-[^3]: Необходимо выбрать хотя бы один сервис: [ВКонтакте](https://vk.com/) или [Telegram](https://telegram.org/) (то есть выбрать 3 или 4 пункт, либо и 3, и 4).
+[^3]: Необходимо выбрать хотя бы один сервис: [ВКонтакте](https://vk.com/) или [Telegram](https://telegram.org/) (то есть выбрать 2 или 3 пункт, либо и 2, и 3).
