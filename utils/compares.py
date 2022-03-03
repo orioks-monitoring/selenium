@@ -54,6 +54,6 @@ def get_msg_from_diff(diffs: list) -> str:
             tmp_msg += '🟢' if diff_task['ball']['is_new_bigger'] else '🔴'
             tmp_msg += f" {diff_task['task']}: \n"
             tmp_msg += f"{diff_task['ball']['old_ball']} -> {diff_task['ball']['current_ball']} (из {diff_task['ball']['max_grade']})"
-            tmp_msg += f" ({'%2B' if diff_task['ball']['is_new_bigger'] else '-'}{diff_task['ball']['abs_difference']})\n"
+            tmp_msg += f" ({'+' if diff_task['ball']['is_new_bigger'] else '-'}{diff_task['ball']['abs_difference']})\n"
         msg += f"{diff_subject['subject']} ({diff_subject['final_grade']['current_ball']} из {diff_subject['final_grade']['might_be']})\n{tmp_msg}\n"
     return msg
