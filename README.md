@@ -1,29 +1,26 @@
 ## Описание
-Скрипт для мониторинга информациии с сайта [orioks.miet.ru](https://orioks.miet.ru/). Автоматическая отправка уведомления при изменениях через [API VK](https://dev.vk.com/) или [API Telegram](https://core.telegram.org/bots/api). Подразумевается, что скрипт работает на бесплатном сервисе от [GitHub Actions](https://github.com/features/actions), поэтому для хранения данных пользователя используется [API Yandex Disk](https://yandex.ru/dev/disk/rest/).
+Скрипт для мониторинга информации с сайта [orioks.miet.ru](https://orioks.miet.ru/). Автоматическая отправка уведомления при изменениях через [API VK](https://dev.vk.com/) или [API Telegram](https://core.telegram.org/bots/api). Подразумевается, что скрипт работает на бесплатном сервисе от [GitHub Actions](https://github.com/features/actions), поэтому для хранения данных пользователя используется [API Yandex Disk](https://yandex.ru/dev/disk/rest/).
 
-Скрипт запускается каждые 15 минут[^1] и сравнивает данные, хранящиеся на [Яндекс Диске](https://disk.yandex.ru/), с информацией от [API ORIOKS](https://orioks.gitlab.io/student-api/).
+Скрипт запускается каждые 15 минут[^1] и сравнивает данные, хранящиеся на [Яндекс Диске](https://disk.yandex.ru/), с информацией от драйвера браузера [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/).
+
+_P.S. Существует [скрипт](https://github.com/llirrikk/orioks-monitoring), работающий на основе [ORIOKS STUDENT **API**](https://orioks.gitlab.io/student-api/), но его использование не рекомендуется[^2]._
 
 
 [^1]: > Выполнение может быть отложено в периоды высокой загрузки рабочих процессов GitHub Actions... Самый короткий интервал, с которым вы можете запускать запланированные рабочие процессы, — [каждые 15 минут](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule).
 
+[^2]: > [ORIOKS STUDENT API](https://orioks.gitlab.io/student-api/) имеет ряд ограничений (не позволяет получить всю необходимую информацию), поэтому рекомендуется использовать скрипт из настоящего репозитория, вместо [скрипта, использующего API](https://github.com/llirrikk/orioks-monitoring).
+
 
 ## Использование
-1. Клонируем [репозиторий](https://github.com/llirrikk/orioks-monitoring).
+
+1. Клонируем [репозиторий](https://github.com/llirrikk/orioks-monitoring-selenium) через Терминал
     ```bash
-    git clone https://github.com/llirrikk/orioks-monitoring.git
-    cd orioks-monitoring
+    git clone https://github.com/llirrikk/orioks-monitoring-selenium.git
+    cd orioks-monitoring-selenium
     ```
 
 
-2. Получение [Orioks API Bearer token](https://orioks.gitlab.io/student-api/auth.html)
-    1. Выполняем:
-        ```bash
-        env ORIOKS_LOGPASS="логин:пароль" setup/get_orioks_token.sh
-        ```
-    2. Запоминаем `ORIOKS_API_TOKEN`
-
-
-3. Получение [API токена от Yandex Disk](https://yandex.ru/dev/oauth/)
+2. Получение [API токена от Yandex Disk](https://yandex.ru/dev/oauth/)
     1. Переходим по [ссылке](https://oauth.yandex.ru/client/new).
         - *Название приложения*:	`ЛЮБОЕ`.
         - *Платформы*: `"Веб-сервисы"` -> `"Подставить URL для разработки"` -> Кнопка `"Добавить"`.
@@ -33,12 +30,9 @@
         https://oauth.yandex.ru/authorize?response_type=token&client_id=ИДЕНТИФИКАТОР_ПРИЛОЖЕНИЯ
     3. Нажимаем кнопку `"Войти как ..."`.
     4. Запоминаем `YANDEX_DISK_API_TOKEN` токен Яндекс Диска.
-    5. Создаем папку для приложения, выполнив:
-        ```bash
-        env YANDEX_DISK_TOKEN="YANDEX_DISK_access_token" setup/create_folder_yandex_disk.sh
-        ```
 
-4. [^2]Получение [API токена от паблика VK](https://dev.vk.com/)
+
+3. [^3]Получение [API токена от паблика VK](https://dev.vk.com/)
     1. Создание группы ВК
         - Выбираем `"Группа по интересам"`.
         - *Название*: `ЛЮБОЕ`.
@@ -56,22 +50,23 @@
         2. Запоминаем `VK_PEER_ID` свой *VK ID*.
 
 
-5. [^2]Получение [API токена для Telegram бота](https://core.telegram.org/bots/api)
+4. [^3]Получение [API токена для Telegram бота](https://core.telegram.org/bots/api)
     1. Пишем `/newbot` сюда: [@BotFather](https://t.me/botfather).
     2. Запоминаем `TG_API_TOKEN` токен Telegram бота.
     3. Узнаём свой *Telegram ID*, например, так:
-        1. Пишем `/start` сюда: [@username_to_id_bot](http://t.me/username_to_id_bot).
+        1. Пишем `/start` сюда: [@userinfobot](https://t.me/userinfobot).
         2. Запоминаем `TG_CHAT_ID` свой *Telegram ID*.
 
 
-6. Настроить выполнение скрипта на [GitHub Actions](https://github.com/features/actions).
-    1. Сделать **Fork** [репозитория](https://github.com/llirrikk/orioks-monitoring).
-    2. Включить **Actions** в репозитории своего профиля, нажав на кнопку: *I understand my workflows, go ahead and enable them*.
-    3. Перейти в *Settings* -> *Secrets* -> *Actions* -> *New repository secret* и добавить все полученные на прошлих шагах значения: 
-        - `ORIOKS_API_TOKEN`, `YANDEX_DISK_API_TOKEN`,
-        - `VK_API_TOKEN`, `VK_PEER_ID` и/или[^2] `TG_API_TOKEN`, `TG_CHAT_ID`,
+5. Настройка выполнения скрипта на [GitHub Actions](https://github.com/features/actions).
+    1. Сделать **Fork** [репозитория](https://github.com/llirrikk/orioks-monitoring-selenium).
+    2. Включить **Actions** в репозитории своего профиля, нажав на кнопку: *I understand my workflows, go ahead and enable them*, затем на кнопку *Enable workflow*.
+    3. Перейти в *Settings* -> *Secrets* -> *Actions* -> *New repository secret* и добавить значения: 
+        - `ORIOKS_LOGPASS_LOGIN` (логин ОРИОКС), `ORIOKS_LOGPASS_PASSWORD` (пароль ОРИОКС),
+        - `YANDEX_DISK_API_TOKEN`,
+        - `VK_API_TOKEN`, `VK_PEER_ID` и/или[^3] `TG_API_TOKEN`, `TG_CHAT_ID`,
         - `VK_USE` (*True*, если использовать сервис ВК, *False* -- в противном случае),
         - `TG_USE` (*True*, если использовать сервис Telegram, *False* -- в противном случае).
 
 
-[^2]: Необходимо выбрать хотя бы один сервис: [ВКонтакте](https://vk.com/) или [Telegram](https://telegram.org/) (то есть выбрать 4 или 5 пункт, либо и 4, и 5).
+[^3]: Необходимо выбрать хотя бы один сервис: [ВКонтакте](https://vk.com/) или [Telegram](https://telegram.org/) (то есть выбрать 3 или 4 пункт, либо и 3, и 4).
