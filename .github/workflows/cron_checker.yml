@@ -7,7 +7,7 @@ on:
   schedule:
     - cron: "10,25,40,55 * * * *"
 
-env: # environment variables
+env:
   YANDEX_DISK_API_TOKEN: ${{ secrets.YANDEX_DISK_API_TOKEN }}
   VK_API_TOKEN: ${{ secrets.VK_API_TOKEN }}
   VK_PEER_ID: ${{ secrets.ORIOKS_API_TOKEN }}
@@ -22,17 +22,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: . setup/create_folder_yandex_disk.sh
-  firefox_browser:
+  check:
+    needs: create_yadisk_folder
     runs-on: ubuntu-latest
     steps:
       - uses: satackey/action-docker-layer-caching@v0.0.11
         continue-on-error: true
-      - uses: docker-practice/actions-setup-docker@master
+      # - uses: docker-practice/actions-setup-docker@master
       - run: docker run -d -p 4444:4444 selenium/standalone-firefox
-  check:
-    needs: [create_yadisk_folder, firefox_browser]
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
