@@ -21,8 +21,8 @@ def file_compares(old_file: list, new_file: list):
             old_grade = old_task['current_grade']
             new_grade = new_task['current_grade']
             if old_grade != new_grade:
-                old_grade = 0 if old_grade == '-' else old_grade
-                new_grade = 0 if new_grade == '-' else new_grade
+                old_grade = 0 if old_grade == '-' or old_grade == 'н' else old_grade
+                new_grade = 0 if new_grade == '-' or new_grade == 'н' else new_grade
                 diffs_one_subject.append({
                     'task': new_task['alias'],
                     'ball': {
