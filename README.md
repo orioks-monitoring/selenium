@@ -13,14 +13,7 @@ _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-mon
 
 ## Использование
 
-1. Клонируем [репозиторий](https://github.com/llirrikk/orioks-monitoring-selenium) через Терминал
-    ```bash
-    git clone https://github.com/llirrikk/orioks-monitoring-selenium.git
-    cd orioks-monitoring-selenium
-    ```
-
-
-2. Получение [API токена от Yandex Disk](https://yandex.ru/dev/oauth/)
+1. Получение [API токена от Yandex Disk](https://yandex.ru/dev/oauth/)
     1. Переходим по [ссылке](https://oauth.yandex.ru/client/new).
         - *Название приложения*:	`ЛЮБОЕ`.
         - *Платформы*: `"Веб-сервисы"` -> `"Подставить URL для разработки"` -> Кнопка `"Добавить"`.
@@ -32,7 +25,7 @@ _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-mon
     4. Запоминаем `YANDEX_DISK_API_TOKEN` токен Яндекс Диска.
 
 
-3. [^3]Получение [API токена от паблика VK](https://dev.vk.com/)
+2. [^3]Получение [API токена от паблика VK](https://dev.vk.com/)
     1. Создание группы ВК
         - Выбираем `"Группа по интересам"`.
         - *Название*: `ЛЮБОЕ`.
@@ -50,7 +43,7 @@ _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-mon
         2. Запоминаем `VK_PEER_ID` свой *VK ID*.
 
 
-4. [^3]Получение [API токена для Telegram бота](https://core.telegram.org/bots/api)
+3. [^3]Получение [API токена для Telegram бота](https://core.telegram.org/bots/api)
     1. Пишем `/newbot` сюда: [@BotFather](https://t.me/botfather).
     2. Запоминаем `TG_API_TOKEN` токен Telegram бота.
     3. Узнаём свой *Telegram ID*, например, так:
@@ -58,7 +51,7 @@ _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-mon
         2. Запоминаем `TG_CHAT_ID` свой *Telegram ID*.
 
 
-5. Настройка выполнения скрипта на [GitHub Actions](https://github.com/features/actions).
+4. Настройка выполнения скрипта на [GitHub Actions](https://github.com/features/actions).
     1. Сделать **Fork** [репозитория](https://github.com/llirrikk/orioks-monitoring-selenium).
     2. Включить **Actions** в репозитории своего профиля, нажав на кнопку: *I understand my workflows, go ahead and enable them*, затем на кнопку *Enable workflow*.
     3. Перейти в *Settings* -> *Secrets* -> *Actions* -> *New repository secret* и добавить значения: 
