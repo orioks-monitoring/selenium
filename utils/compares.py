@@ -2,21 +2,22 @@ from typing import Union
 
 
 def file_compares(old_file: list, new_file: list):
+    """return (`diffs`, Error or OK, `is_notify`) """
     if len(old_file) != len(new_file):
         return (None, "Error")
     
     diffs = []
     for old, new in zip(old_file, new_file):
         if old['subject'] != new['subject']:
-            return (None, "Error")
+            return (None, "Error", True)
         if len(old['tasks']) != len(new['tasks']):
-            return (None, "Error")
+            return (None, "Error", False)
         diffs_one_subject = []
         for old_task, new_task in zip(old['tasks'], new['tasks']):
             if old_task['max_grade'] != new_task['max_grade']:
-                return (None, "Error")
+                return (None, "Error", False)
             if old_task['alias'] != new_task['alias']:
-                return (None, "Error")
+                return (None, "Error", False)
 
             old_grade = old_task['current_grade']
             new_grade = new_task['current_grade']
@@ -42,7 +43,7 @@ def file_compares(old_file: list, new_file: list):
                     'might_be': new['ball']['might_be'],
                 },
             })
-    return (diffs, "OK")
+    return (diffs, "OK", True)
 
 
 def get_msg_from_diff(diffs: list) -> str:

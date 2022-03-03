@@ -53,11 +53,14 @@ async def checker():
         return await checker()
     
     old_json = JsonFile.open(filename=student_json_file)
-    diffs, errno = file_compares(old_file=old_json, new_file=detailed_info)
+    diffs, errno, is_notify = file_compares(old_file=old_json, new_file=detailed_info)
     if errno == 'Error':
         JsonFile.save(data=detailed_info, filename=student_json_file)
         await YandexDisk.upload(filename=student_json_file)
-        await logs_info_update(msg=f'Структура файла данных поменялась. Начался новый семестр?', send_notify=True)
+        if is_notify:
+            await logs_info_update(msg=f'Структура файла данных поменялась. Начался новый семестр.', send_notify=True)
+        else:
+            await logs_info_update(msg=f'Структура файла данных поменялась.', send_notify=False)
         await upload_diff(detailed_old_info=old_json, detailed_new_info=detailed_info, student_id=student_id)
         os.remove(student_json_file)
         return await checker()
