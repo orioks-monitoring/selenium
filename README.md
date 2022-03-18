@@ -3,7 +3,7 @@
 
 Скрипт запускается каждые 15 минут[^1] и сравнивает данные, хранящиеся на [Яндекс Диске](https://disk.yandex.ru/), с информацией от драйвера браузера [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/).
 
-_P.S. Существует [скрипт](https://github.com/llirrikk/orioks-monitoring), работающий на основе [ORIOKS STUDENT **API**](https://orioks.gitlab.io/student-api/), но его использование не рекомендуется[^2]._
+_P.S. Существует [скрипт](https://github.com/llirrikk/orioks-monitoring-api/), работающий на основе [ORIOKS STUDENT **API**](https://orioks.gitlab.io/student-api/), но его использование не рекомендуется[^2]._
 
 
 [^1]: > Выполнение может быть отложено в периоды высокой загрузки рабочих процессов GitHub Actions... Самый короткий интервал, с которым вы можете запускать запланированные рабочие процессы, — [каждые 15 минут](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule).
