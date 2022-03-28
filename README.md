@@ -1,14 +1,14 @@
+# ОРИОКС Мониторинг Selenium
+
+*Существует [Бот](https://github.com/orioks-monitoring/bot) - усовершенствованная и самая полная версия настоящего скрипта, подходящая для широкого круга пользователей*
+
+
 ## Описание
 Скрипт для мониторинга информации с сайта [orioks.miet.ru](https://orioks.miet.ru/). Автоматическая отправка уведомления при изменениях через [API VK](https://dev.vk.com/) или [API Telegram](https://core.telegram.org/bots/api). Подразумевается, что скрипт работает на бесплатном сервисе от [GitHub Actions](https://github.com/features/actions), поэтому для хранения данных пользователя используется [API Yandex Disk](https://yandex.ru/dev/disk/rest/).
 
 Скрипт запускается каждые 15 минут[^1] и сравнивает данные, хранящиеся на [Яндекс Диске](https://disk.yandex.ru/), с информацией от драйвера браузера [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/).
 
 _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-monitoring-api/), работающий на основе [ORIOKS STUDENT **API**](https://orioks.gitlab.io/student-api/), но его использование не рекомендуется[^2]._
-
-
-[^1]: > Выполнение может быть отложено в периоды высокой загрузки рабочих процессов GitHub Actions... Самый короткий интервал, с которым вы можете запускать запланированные рабочие процессы, — [каждые 15 минут](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule).
-
-[^2]: [ORIOKS STUDENT API](https://orioks.gitlab.io/student-api/) имеет ряд ограничений (не позволяет получить всю необходимую информацию), поэтому рекомендуется использовать скрипт из настоящего репозитория, вместо [скрипта, использующего API](https://github.com/llirrikk/orioks-monitoring).
 
 
 ## Использование
@@ -61,5 +61,10 @@ _P.S. Существует [скрипт](https://github.com/llirrikk/orioks-mon
         - `VK_USE` (*True*, если использовать сервис ВК, *False* -- в противном случае),
         - `TG_USE` (*True*, если использовать сервис Telegram, *False* -- в противном случае).
 
+
+
+[^1]: > Выполнение может быть отложено в периоды высокой загрузки рабочих процессов GitHub Actions... Самый короткий интервал, с которым вы можете запускать запланированные рабочие процессы, — [каждые 15 минут](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule).
+
+[^2]: [ORIOKS STUDENT API](https://orioks.gitlab.io/student-api/) имеет ряд ограничений (не позволяет получить всю необходимую информацию), поэтому рекомендуется использовать скрипт из настоящего репозитория, вместо [скрипта, использующего API](https://github.com/llirrikk/orioks-monitoring).
 
 [^3]: Необходимо выбрать хотя бы один сервис: [ВКонтакте](https://vk.com/) или [Telegram](https://telegram.org/) (то есть выбрать 2 или 3 пункт, либо и 2, и 3).
